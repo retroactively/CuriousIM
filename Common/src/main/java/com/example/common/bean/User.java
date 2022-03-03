@@ -1,6 +1,5 @@
 package com.example.common.bean;
 
-
 import com.example.common.meta.Msg;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

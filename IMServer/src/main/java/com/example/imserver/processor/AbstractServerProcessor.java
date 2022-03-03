@@ -1,6 +1,6 @@
 package com.example.imserver.processor;
 
-import com.example.common.session.ServerSession;
+import com.example.imserver.session.ServerSession;
 import io.netty.channel.Channel;
 
 public abstract class AbstractServerProcessor implements ServerProcessor{

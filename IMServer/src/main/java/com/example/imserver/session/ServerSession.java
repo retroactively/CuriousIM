@@ -1,4 +1,4 @@
-package com.example.common.session;
+package com.example.imserver.session;
 
 
 import com.example.common.bean.User;

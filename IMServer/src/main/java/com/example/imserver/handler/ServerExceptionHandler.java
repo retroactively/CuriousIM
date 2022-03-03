@@ -1,7 +1,7 @@
 package com.example.imserver.handler;
 
 import com.example.common.exception.InvalidFrameException;
-import com.example.common.session.ServerSession;
+import com.example.imserver.session.ServerSession;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

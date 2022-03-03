@@ -1,7 +1,7 @@
 package com.example.imserver.processor;
 
 import com.example.common.meta.Msg;
-import com.example.common.session.ServerSession;
+import com.example.imserver.session.ServerSession;
 
 public interface ServerProcessor {
 

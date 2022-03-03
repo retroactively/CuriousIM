@@ -1,4 +1,4 @@
-package com.example.common.session;
+package com.example.imserver.session;
 
 import com.example.common.bean.User;
 import lombok.extern.slf4j.Slf4j;

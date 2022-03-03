@@ -1,8 +1,8 @@
-package com.example.common.builder;
+package com.example.imclient.builder;
 
 import com.example.common.bean.UserDTO;
 import com.example.common.meta.Msg;
-import com.example.common.session.ClientSession;
+import com.example.imclient.session.ClientSession;
 import com.google.protobuf.ByteString;
 
 public class HeartBeatBuilder extends BaseBuilder {

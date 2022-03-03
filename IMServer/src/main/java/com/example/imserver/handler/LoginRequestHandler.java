@@ -4,7 +4,7 @@ import com.example.common.concurrent.CallbackTask;
 import com.example.common.concurrent.CallbackTaskScheduler;
 import com.example.common.meta.Msg;
 import com.example.imserver.processor.LoginProcessor;
-import com.example.common.session.ServerSession;
+import com.example.imserver.session.ServerSession;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

@@ -2,7 +2,7 @@ package com.example.imserver.handler;
 
 import com.example.common.concurrent.FutureTaskScheduler;
 import com.example.common.meta.Msg;
-import com.example.common.session.ServerSession;
+import com.example.imserver.session.ServerSession;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;

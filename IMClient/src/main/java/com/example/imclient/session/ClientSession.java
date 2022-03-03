@@ -1,4 +1,4 @@
-package com.example.common.session;
+package com.example.imclient.session;
 
 import com.example.common.bean.UserDTO;
 import com.example.common.meta.Msg;
@@ -31,6 +31,9 @@ public class ClientSession {
 
 	private boolean loginState = false;
 
+	/**
+	 * session中存储的session 变量属性值
+	 */
 	private Map<String, Object> map = new HashMap<>();
 
 	/**
