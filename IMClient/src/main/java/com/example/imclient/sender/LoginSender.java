@@ -1,12 +1,11 @@
 package com.example.imclient.sender;
 
-
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.imclient.builder.LoginMsgBuilder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LoginSender extends BaseSender{
+public class LoginSender extends BaseSender {
 
 	public void sendLoginMsg() {
 		if (!isConnected()) {
@@ -15,7 +14,7 @@ public class LoginSender extends BaseSender{
 		}
 
 		log.info("build login msg!");
-		Msg.ProtoMsg.Message message = LoginMsgBuilder.buildLoginMsg(getUser(), getClientSession());
+		Immsg.Message message = LoginMsgBuilder.buildLoginMsg(getUser(), getClientSession());
 		log.info("send login msg!");
 		super.sendMessage(message);
 	}

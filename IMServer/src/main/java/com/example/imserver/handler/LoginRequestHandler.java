@@ -2,7 +2,7 @@ package com.example.imserver.handler;
 
 import com.example.common.concurrent.CallbackTask;
 import com.example.common.concurrent.CallbackTaskScheduler;
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.imserver.processor.LoginProcessor;
 import com.example.imserver.session.ServerSession;
 import io.netty.channel.ChannelHandler;
@@ -23,13 +23,13 @@ public class LoginRequestHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		// 1. 无效消息，后传
-		if (!(msg instanceof Msg.ProtoMsg.Message)) {
+		if (!(msg instanceof Immsg.Message)) {
 			super.channelRead(ctx, msg);
 			return;
 		}
 
-		Msg.ProtoMsg.Message pkg = (Msg.ProtoMsg.Message) msg;
-		Msg.ProtoMsg.HeadType headType = pkg.getType();
+		Immsg.Message pkg = (Immsg.Message) msg;
+		Immsg.HeadType headType = pkg.getType();
 		// 2. 非登陆消息，后传
 		if (!headType.equals(loginProcessor.getType())) {
 			super.channelRead(ctx, msg);

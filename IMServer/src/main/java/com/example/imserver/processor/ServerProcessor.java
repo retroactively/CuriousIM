@@ -1,5 +1,6 @@
 package com.example.imserver.processor;
 
+import com.example.common.meta.Immsg;
 import com.example.common.meta.Msg;
 import com.example.imserver.session.ServerSession;
 
@@ -17,5 +18,5 @@ public interface ServerProcessor {
 	 * @param proto Msg.ProtoMsg.Message
 	 * @return boolean
 	 */
-	boolean action(ServerSession session, Msg.ProtoMsg.Message proto);
+	boolean action(ServerSession session, Immsg.Message proto);
 }

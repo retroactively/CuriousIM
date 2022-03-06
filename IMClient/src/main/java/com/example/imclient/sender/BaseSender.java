@@ -1,7 +1,7 @@
 package com.example.imclient.sender;
 
 import com.example.common.bean.User;
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.imclient.session.ClientSession;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -35,7 +35,7 @@ public abstract class BaseSender {
 		return clientSession.isLoginState();
 	}
 
-	public void sendMessage(Msg.ProtoMsg.Message message) {
+	public void sendMessage(Immsg.Message message) {
 		if (null == getClientSession() || !isConnected()) {
 			log.info("connection is still not established!");
 			return;
@@ -59,11 +59,11 @@ public abstract class BaseSender {
 		}
 	}
 
-	protected void sendSucceed(Msg.ProtoMsg.Message msg) {
+	protected void sendSucceed(Immsg.Message msg) {
 		log.info("send message successfully!");
 	}
 
-	protected void sendFailed(Msg.ProtoMsg.Message msg) {
+	protected void sendFailed(Immsg.Message msg) {
 		log.warn("send message failed!");
 	}
 

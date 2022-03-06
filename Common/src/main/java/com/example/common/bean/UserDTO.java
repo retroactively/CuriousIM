@@ -1,6 +1,6 @@
 package com.example.common.bean;
 
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,11 +19,17 @@ public class UserDTO {
 
 	PLATTYPE platform = PLATTYPE.MAC;
 
-	public enum PLATTYPE {
-		WINDOWS, MAC, ANDROID, IOS, WEB, OTHER
-	}
-
 	private String sessionId;
+
+	public static UserDTO fromMsg(Immsg.LoginRequest request) {
+		UserDTO user = new UserDTO();
+		user.setUserId(request.getUid());
+		user.setDevId(request.getDeviceId());
+		user.setToken(request.getToken());
+		user.setPlatform(request.getPlatform());
+		log.info("login progress: {}", user);
+		return user;
+	}
 
 	public void setPlatform(int platform) {
 		PLATTYPE[] values = PLATTYPE.values();
@@ -47,13 +53,7 @@ public class UserDTO {
 				'}';
 	}
 
-	public static UserDTO fromMsg(Msg.ProtoMsg.LoginRequest request) {
-		UserDTO user = new UserDTO();
-		user.setUserId(request.getUid());
-		user.setDevId(request.getDeviceId());
-		user.setToken(request.getToken());
-		user.setPlatform(request.getPlatform());
-		log.info("login progress: {}", user.toString());
-		return user;
+	public enum PLATTYPE {
+		WINDOWS, MAC, ANDROID, IOS, WEB, OTHER
 	}
 }

@@ -1,6 +1,6 @@
 package com.example.common.codec;
 
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.common.meta.ProtoInstant;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,9 +8,9 @@ import io.netty.handler.codec.MessageToByteEncoder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ProtobufEncoder extends MessageToByteEncoder<Msg.ProtoMsg.Message> {
+public class ProtobufEncoder extends MessageToByteEncoder<Immsg.Message> {
 	@Override
-	protected void encode(ChannelHandlerContext ctx, Msg.ProtoMsg.Message message, ByteBuf byteBuf) throws Exception {
+	protected void encode(ChannelHandlerContext ctx, Immsg.Message message, ByteBuf byteBuf) throws Exception {
 		byteBuf.writeShort(ProtoInstant.MAGIC_CODE);
 		byteBuf.writeShort(ProtoInstant.VERSION_CODE);
 		// 消息体可以加密

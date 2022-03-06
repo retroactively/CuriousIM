@@ -1,25 +1,24 @@
 package com.example.imclient.builder;
 
 import com.example.common.bean.UserDTO;
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.imclient.session.ClientSession;
-import com.google.protobuf.ByteString;
 
 public class HeartBeatBuilder extends BaseBuilder {
 
 	private final UserDTO user;
 
 	public HeartBeatBuilder(UserDTO user, ClientSession session) {
-		super(Msg.ProtoMsg.HeadType.MESSAGE_NOTIFICATION, session);
+		super(Immsg.HeadType.MESSAGE_NOTIFICATION, session);
 		this.user = user;
 	}
 
-	public Msg.ProtoMsg.Message buildMsg() {
-		Msg.ProtoMsg.Message message = buildCommon(-1);
-		Msg.ProtoMsg.MessageNotification.Builder builder = Msg.ProtoMsg.MessageNotification.newBuilder()
-				.setMsgType(5)
-				.setSender(ByteString.copyFrom(user.getUserId().getBytes()))
-				.setJson("{\"from\":\"client\"}");
-		return message.toBuilder().setMessageNotification(builder).build();
+	public Immsg.Message buildMsg() {
+		Immsg.Message message = buildCommon(-1);
+		Immsg.MessageHeartBeat.Builder builder = Immsg.MessageHeartBeat.newBuilder()
+				.setSeq(0)
+				.setJson("{\"from\":\"client\"}")
+				.setUid(user.getUserId());
+		return message.toBuilder().setHeartBeat(builder).build();
 	}
 }

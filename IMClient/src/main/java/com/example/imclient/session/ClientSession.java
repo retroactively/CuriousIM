@@ -1,7 +1,7 @@
 package com.example.imclient.session;
 
 import com.example.common.bean.UserDTO;
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -51,7 +51,7 @@ public class ClientSession {
 	 * @param ctx ChannelHandlerContext
 	 * @param pkg Msg.ProtoMsg.Message
 	 */
-	public static void loginSuccess(ChannelHandlerContext ctx, Msg.ProtoMsg.Message pkg) {
+	public static void loginSuccess(ChannelHandlerContext ctx, Immsg.Message pkg) {
 		Channel channel = ctx.channel();
 		ClientSession session = channel.attr(ClientSession.SESSION_KEY).get();
 		session.setSessionId(pkg.getSessionId());

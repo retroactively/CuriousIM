@@ -1,7 +1,7 @@
 package com.example.common.codec;
 
 import com.example.common.exception.InvalidFrameException;
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.common.meta.ProtoInstant;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -51,7 +51,7 @@ public class ProtobufDecoder extends ByteToMessageDecoder {
 		}
 
 		// bytes to msg
-		Msg.ProtoMsg.Message msg = Msg.ProtoMsg.Message.parseFrom(bytes);
+		Immsg.Message msg = Immsg.Message.parseFrom(bytes);
 		if (byteBuf.hasArray()) {
 			byteBuf.release();
 		}

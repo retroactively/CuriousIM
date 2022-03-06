@@ -1,6 +1,6 @@
 package com.example.common.bean;
 
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class User implements Serializable {
 
 	private String sessionId;
 
-	public static User fromMsg(Msg.ProtoMsg.LoginRequest request) {
+	public static User fromMsg(Immsg.LoginRequest request) {
 		User user = User.builder()
 				.uid(request.getUid())
 				.devId(request.getDeviceId())
@@ -36,6 +36,7 @@ public class User implements Serializable {
 				.intPlatform(request.getPlatform())
 				.build();
 		log.info("login in progress : {}", user.toString());
+
 		return user;
 	}
 

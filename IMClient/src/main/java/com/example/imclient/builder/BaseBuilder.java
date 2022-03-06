@@ -1,17 +1,18 @@
 package com.example.imclient.builder;
 
+import com.example.common.meta.Immsg;
 import com.example.common.meta.Msg;
 import com.example.imclient.session.ClientSession;
 
 public class BaseBuilder {
 
-	protected Msg.ProtoMsg.HeadType type;
+	protected Immsg.HeadType type;
 
 	private long seqId;
 
 	private ClientSession session;
 
-	public BaseBuilder(Msg.ProtoMsg.HeadType type, ClientSession session) {
+	public BaseBuilder(Immsg.HeadType type, ClientSession session) {
 		this.type = type;
 		this.session = session;
 	}
@@ -21,11 +22,11 @@ public class BaseBuilder {
 	 * @param seqId
 	 * @return
 	 */
-	public Msg.ProtoMsg.Message buildCommon(long seqId) {
+	public Immsg.Message buildCommon(long seqId) {
 		this.seqId = seqId;
 
-		Msg.ProtoMsg.Message.Builder builder =
-				Msg.ProtoMsg.Message.newBuilder()
+		Immsg.Message.Builder builder =
+				Immsg.Message.newBuilder()
 						.setType(type)
 						.setSequence(seqId)
 						.setSessionId(session.getSessionId());

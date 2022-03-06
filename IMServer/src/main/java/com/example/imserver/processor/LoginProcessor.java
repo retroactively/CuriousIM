@@ -1,5 +1,6 @@
 package com.example.imserver.processor;
 
+import com.example.common.meta.Immsg;
 import com.example.imserver.builder.LoginResponseBuilder;
 import com.example.common.bean.User;
 import com.example.common.meta.Msg;
@@ -32,8 +33,8 @@ public class LoginProcessor extends AbstractServerProcessor{
 	}
 
 	@Override
-	public boolean action(ServerSession session, Msg.ProtoMsg.Message proto) {
-		Msg.ProtoMsg.LoginRequest request = proto.getLoginRequest();
+	public boolean action(ServerSession session, Immsg.Message proto) {
+		Immsg.LoginRequest request = proto.getLoginRequest();
 		long seq = proto.getSequence();
 
 		User user = User.fromMsg(request);
