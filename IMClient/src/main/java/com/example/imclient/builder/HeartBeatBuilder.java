@@ -9,7 +9,7 @@ public class HeartBeatBuilder extends BaseBuilder {
 	private final UserDTO user;
 
 	public HeartBeatBuilder(UserDTO user, ClientSession session) {
-		super(Immsg.HeadType.MESSAGE_NOTIFICATION, session);
+		super(Immsg.HeadType.HEART_BEAT, session);
 		this.user = user;
 	}
 
