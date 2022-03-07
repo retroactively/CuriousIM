@@ -1,18 +1,18 @@
 package com.example.imserver.builder;
 
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.common.meta.ProtoInstant;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChatMessageBuilder {
-	public Msg.ProtoMsg.Message chatResponse(long seqId, ProtoInstant.ResultCodeEnum en) {
-		Msg.ProtoMsg.Message.Builder msgBuilder = Msg.ProtoMsg.Message.newBuilder()
-				.setType(Msg.ProtoMsg.HeadType.MESSAGE_RESPONSE)
+	public Immsg.Message chatResponse(long seqId, ProtoInstant.ResultCodeEnum en) {
+		Immsg.Message.Builder msgBuilder = Immsg.Message.newBuilder()
+				.setType(Immsg.HeadType.MESSAGE_RESPONSE)
 				.setSequence(seqId);
 		// TODO  change server Msg to Immsg
 
-		Msg.ProtoMsg.MessageResponse.Builder responseBuilder = Msg.ProtoMsg.MessageResponse.newBuilder()
+		Immsg.MessageResponse.Builder responseBuilder = Immsg.MessageResponse.newBuilder()
 				.setCode(en.getCode())
 				.setInfo(en.getDesc())
 				.setExpose(1);

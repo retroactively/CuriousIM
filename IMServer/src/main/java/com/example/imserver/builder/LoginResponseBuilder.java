@@ -1,18 +1,18 @@
 package com.example.imserver.builder;
 
-import com.example.common.meta.Msg;
+import com.example.common.meta.Immsg;
 import com.example.common.meta.ProtoInstant;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginResponseBuilder {
-	public Msg.ProtoMsg.Message loginResponse(ProtoInstant.ResultCodeEnum en, long seqId, String sessionId) {
-		Msg.ProtoMsg.Message.Builder messageBuilder = Msg.ProtoMsg.Message.newBuilder()
-				.setType(Msg.ProtoMsg.HeadType.LOGIN_RESPONSE)
+	public Immsg.Message loginResponse(ProtoInstant.ResultCodeEnum en, long seqId, String sessionId) {
+		Immsg.Message.Builder messageBuilder = Immsg.Message.newBuilder()
+				.setType(Immsg.HeadType.LOGIN_RESPONSE)
 				.setSequence(seqId)
 				.setSessionId(sessionId);
 
-		Msg.ProtoMsg.LoginResponse.Builder  responseBuilder = Msg.ProtoMsg.LoginResponse.newBuilder()
+		Immsg.LoginResponse.Builder  responseBuilder = Immsg.LoginResponse.newBuilder()
 				.setCode(en.getCode())
 				.setInfo(en.getDesc())
 				.setExpose(1);

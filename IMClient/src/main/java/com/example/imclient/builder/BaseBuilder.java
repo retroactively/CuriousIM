@@ -1,7 +1,6 @@
 package com.example.imclient.builder;
 
 import com.example.common.meta.Immsg;
-import com.example.common.meta.Msg;
 import com.example.imclient.session.ClientSession;
 
 public class BaseBuilder {

@@ -1,7 +1,6 @@
 package com.example.imserver.processor;
 
 import com.example.common.meta.Immsg;
-import com.example.common.meta.Msg;
 import com.example.imserver.session.ServerSession;
 
 public interface ServerProcessor {
@@ -10,7 +9,7 @@ public interface ServerProcessor {
 	 * 获取消息类型
 	 * @return Msg.ProtoMsg.HeadType
 	 */
-	Msg.ProtoMsg.HeadType getType();
+	Immsg.HeadType getType();
 
 	/**
 	 * 定义Processor的行为

@@ -39,7 +39,6 @@ public class LoginRequestHandler extends ChannelInboundHandlerAdapter {
 		ServerSession session = new ServerSession(ctx.channel());
 
 		CallbackTaskScheduler.add(new CallbackTask<Boolean>() {
-
 			@Override
 			public Boolean execute() throws Exception {
 				return loginProcessor.action(session, pkg);

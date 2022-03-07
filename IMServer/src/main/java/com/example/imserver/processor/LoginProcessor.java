@@ -3,7 +3,6 @@ package com.example.imserver.processor;
 import com.example.common.meta.Immsg;
 import com.example.imserver.builder.LoginResponseBuilder;
 import com.example.common.bean.User;
-import com.example.common.meta.Msg;
 import com.example.common.meta.ProtoInstant;
 import com.example.imserver.session.ServerSession;
 import com.example.imserver.session.SessionMap;
@@ -19,8 +18,8 @@ public class LoginProcessor extends AbstractServerProcessor{
 	private LoginResponseBuilder responseBuilder;
 
 	@Override
-	public Msg.ProtoMsg.HeadType getType() {
-		return Msg.ProtoMsg.HeadType.LOGIN_REQUEST;
+	public Immsg.HeadType getType() {
+		return Immsg.HeadType.LOGIN_REQUEST;
 	}
 
 	private boolean checkUser(User user) {
@@ -42,7 +41,7 @@ public class LoginProcessor extends AbstractServerProcessor{
 		if (checkUser(user)) {
 			// 登录失败
 			ProtoInstant.ResultCodeEnum resultCode = ProtoInstant.ResultCodeEnum.NO_TOKEN;
-			Msg.ProtoMsg.Message response = responseBuilder.loginResponse(resultCode, seq, "-1");
+			Immsg.Message response = responseBuilder.loginResponse(resultCode, seq, "-1");
 			session.writeAndFlush(response);
 			return false;
 		}
@@ -51,7 +50,7 @@ public class LoginProcessor extends AbstractServerProcessor{
 		session.bind();
 		// 登陆成功
 		ProtoInstant.ResultCodeEnum resultCode = ProtoInstant.ResultCodeEnum.SUCCESS;
-		Msg.ProtoMsg.Message response = responseBuilder.loginResponse(resultCode, seq, session.getSessionId());
+		Immsg.Message response = responseBuilder.loginResponse(resultCode, seq, session.getSessionId());
 		session.writeAndFlush(response);
 		return true;
 	}
