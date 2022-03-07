@@ -10,7 +10,6 @@ public class ChatMessageBuilder {
 		Immsg.Message.Builder msgBuilder = Immsg.Message.newBuilder()
 				.setType(Immsg.HeadType.MESSAGE_RESPONSE)
 				.setSequence(seqId);
-		// TODO  change server Msg to Immsg
 
 		Immsg.MessageResponse.Builder responseBuilder = Immsg.MessageResponse.newBuilder()
 				.setCode(en.getCode())

@@ -37,7 +37,7 @@ public class ChatClient {
 	@Autowired
 	private ExceptionHandler exceptionHandler;
 
-	private GenericFutureListener<ChannelFuture> connectedListeners;
+	private GenericFutureListener<ChannelFuture> connectedListener;
 
 	private EventLoopGroup eventLoopGroup;
 
@@ -70,7 +70,7 @@ public class ChatClient {
 			log.info("client start to connect the server!");
 
 			ChannelFuture future = bootstrap.connect();
-			future.addListener(connectedListeners);
+			future.addListener(connectedListener);
 		} catch (Exception e) {
 			log.error("client connect failed, " + e.getMessage());
 		}
