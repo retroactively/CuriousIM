@@ -19,7 +19,7 @@ public class HeartBeatBuilder extends BaseBuilder {
 		Immsg.MessageHeartBeat.Builder builder = Immsg.MessageHeartBeat.newBuilder()
 				.setSeq(0)
 				.setJson("{\"from\":\"client\"}")
-				.setUid(user.getUserId());
+				.setUid(user.getUid());
 		return message.toBuilder().setHeartBeat(builder).build();
 	}
 }

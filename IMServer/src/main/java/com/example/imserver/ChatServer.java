@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.net.InetSocketAddress;
 
 @Slf4j
@@ -34,6 +35,7 @@ public class ChatServer {
 	@Autowired
 	private ServerExceptionHandler serverExceptionHandler;
 
+	@PostConstruct
 	public void run() {
 		ServerBootstrap bootstrap = new ServerBootstrap();
 		EventLoopGroup  bossGroup = new NioEventLoopGroup();

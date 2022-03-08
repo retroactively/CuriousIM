@@ -50,7 +50,6 @@ public class ChatClient {
 		bootstrap = new Bootstrap();
 	}
 
-	@PostConstruct
 	public void connect() {
 		try {
 			bootstrap.group(eventLoopGroup);
@@ -73,6 +72,8 @@ public class ChatClient {
 
 			ChannelFuture future = bootstrap.connect();
 			future.addListener(connectedListener);
+
+			future.channel().closeFuture().sync();
 		} catch (Exception e) {
 			log.error("client connect failed, " + e.getMessage());
 		}

@@ -9,8 +9,6 @@ public class ImServerApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(ImServerApplication.class, args);
-		ChatServer server = context.getBean(ChatServer.class);
-		server.run();
 	}
 
 }
