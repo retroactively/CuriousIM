@@ -1,14 +1,15 @@
 package com.example.imclient.builder;
 
+import com.example.common.bean.User;
 import com.example.common.bean.UserDTO;
 import com.example.common.meta.Immsg;
 import com.example.imclient.session.ClientSession;
 
 public class HeartBeatBuilder extends BaseBuilder {
 
-	private final UserDTO user;
+	private final User user;
 
-	public HeartBeatBuilder(UserDTO user, ClientSession session) {
+	public HeartBeatBuilder(User user, ClientSession session) {
 		super(Immsg.HeadType.HEART_BEAT, session);
 		this.user = user;
 	}

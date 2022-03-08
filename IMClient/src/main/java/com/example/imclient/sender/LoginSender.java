@@ -3,8 +3,10 @@ package com.example.imclient.sender;
 import com.example.common.meta.Immsg;
 import com.example.imclient.builder.LoginMsgBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
+@Service
 public class LoginSender extends BaseSender {
 
 	public void sendLoginMsg() {

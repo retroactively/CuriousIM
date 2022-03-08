@@ -1,5 +1,6 @@
 package com.example.imclient.handler;
 
+import com.example.common.bean.User;
 import com.example.common.bean.UserDTO;
 import com.example.common.meta.Immsg;
 import com.example.imclient.builder.HeartBeatBuilder;
@@ -29,7 +30,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
 		ClientSession session = ClientSession.getSession(ctx);
-		UserDTO user = session.getUser();
+		User user = session.getUser();
 		HeartBeatBuilder builder = new HeartBeatBuilder(user, session);
 		Immsg.Message message = builder.buildMsg();
 		heartbeat(ctx, message);

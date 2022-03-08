@@ -1,6 +1,7 @@
 package com.example.imclient.sender;
 
 import com.example.common.bean.User;
+import com.example.common.bean.UserDTO;
 import com.example.common.meta.Immsg;
 import com.example.imclient.session.ClientSession;
 import io.netty.channel.Channel;

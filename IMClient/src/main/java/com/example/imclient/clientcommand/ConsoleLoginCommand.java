@@ -1,10 +1,17 @@
 package com.example.imclient.clientcommand;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
 import java.util.Scanner;
 
+@Slf4j
+@Data
+@Service
 public class ConsoleLoginCommand implements BaseCommand{
 
-	private static final String KEY = "2";
+	public static final String KEY = "2";
 
 	private String userName;
 

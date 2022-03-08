@@ -1,6 +1,6 @@
 package com.example.imclient.session;
 
-import com.example.common.bean.UserDTO;
+import com.example.common.bean.User;
 import com.example.common.meta.Immsg;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -22,7 +22,7 @@ public class ClientSession {
 	// 客户端用户会话管理的核心
 	private Channel channel;
 
-	private UserDTO user;
+	private User user;
 
 	// 保存登陆后，服务端返回的sessionId
 	private String sessionId;
