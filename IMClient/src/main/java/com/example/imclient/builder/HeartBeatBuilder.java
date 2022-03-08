@@ -1,12 +1,10 @@
 package com.example.imclient.builder;
 
 import com.example.common.bean.User;
-import com.example.common.bean.UserDTO;
 import com.example.common.meta.Immsg;
 import com.example.imclient.session.ClientSession;
 
 public class HeartBeatBuilder extends BaseBuilder {
-
 	private final User user;
 
 	public HeartBeatBuilder(User user, ClientSession session) {
@@ -19,7 +17,7 @@ public class HeartBeatBuilder extends BaseBuilder {
 		Immsg.MessageHeartBeat.Builder builder = Immsg.MessageHeartBeat.newBuilder()
 				.setSeq(0)
 				.setJson("{\"from\":\"client\"}")
-				.setUid(user.getUid());
+				.setUid(user.getUserId());
 		return message.toBuilder().setHeartBeat(builder).build();
 	}
 }

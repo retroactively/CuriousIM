@@ -14,10 +14,13 @@ import java.io.Serializable;
 @Slf4j
 public class User implements Serializable {
 
-	String uid;
+	String userId;
+
+	String userName;
 
 	String devId;
 
+	// password
 	String token;
 
 	String nickName;
@@ -30,7 +33,7 @@ public class User implements Serializable {
 
 	public static User fromMsg(Immsg.LoginRequest request) {
 		User user = User.builder()
-				.uid(request.getUid())
+				.userId(request.getUid())
 				.devId(request.getDeviceId())
 				.token(request.getToken())
 				.intPlatform(request.getPlatform())

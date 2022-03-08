@@ -1,7 +1,6 @@
 package com.example.imclient.handler;
 
 import com.example.common.bean.User;
-import com.example.common.bean.UserDTO;
 import com.example.common.meta.Immsg;
 import com.example.imclient.builder.HeartBeatBuilder;
 import com.example.imclient.session.ClientSession;
