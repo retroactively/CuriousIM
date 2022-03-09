@@ -19,7 +19,7 @@ public class LoginMsgBuilder extends BaseBuilder{
 				.setDeviceId(user.getDevId())
 				.setPlatform(user.getIntPlatform())
 				.setToken(user.getToken())
-				.setUid(user.getUid());
+				.setUid(user.getUserId());
 		return message.toBuilder().setLoginRequest(builder).build();
 	}
 

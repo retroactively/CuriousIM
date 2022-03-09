@@ -19,8 +19,6 @@ public class FutureTaskScheduler {
 	}
 
 	public static void add(Runnable executeTask) {
-		mixPool.submit(() -> {
-			executeTask.run();
-		});
+		mixPool.submit(executeTask::run);
 	}
 }

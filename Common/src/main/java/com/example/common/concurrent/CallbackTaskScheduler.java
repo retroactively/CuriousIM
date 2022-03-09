@@ -31,7 +31,8 @@ public class CallbackTaskScheduler extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-
+			handleTask();
+			threadSleep(sleepTime);
 		}
 	}
 

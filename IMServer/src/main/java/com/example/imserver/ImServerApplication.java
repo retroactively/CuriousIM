@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 public class ImServerApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(ImServerApplication.class, args);
+		SpringApplication.run(ImServerApplication.class, args);
 	}
 
 }

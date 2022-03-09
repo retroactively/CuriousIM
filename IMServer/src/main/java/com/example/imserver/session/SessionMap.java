@@ -27,7 +27,7 @@ public class SessionMap {
 
 	public void addSession(String sessionId, ServerSession session) {
 		map.put(sessionId, session);
-		log.info("User login: id = " + session.getUser().getUid() + " , online sums: " + map.size());
+		log.info("User login: id = " + session.getUser().getUserId() + " , online sums: " + map.size());
 	}
 
 	public void removeSession(String sessionId) {
@@ -36,7 +36,7 @@ public class SessionMap {
 		}
 		ServerSession session = map.get(sessionId);
 		map.remove(sessionId);
-		log.info("User logout: id = " + session.getUser().getUid() + " , online sums: " + map.size());
+		log.info("User logout: id = " + session.getUser().getUserId() + " , online sums: " + map.size());
 	}
 
 	public ServerSession getSession(String sessionId) {
@@ -44,7 +44,7 @@ public class SessionMap {
 	}
 
 	public List<ServerSession> getSessionsByUser(String userId) {
-		return map.values().stream().filter(s -> s.getUser().getUid().equals(userId)).collect(Collectors.toList());
+		return map.values().stream().filter(s -> s.getUser().getUserId().equals(userId)).collect(Collectors.toList());
 	}
 
 	public boolean isLogin(User user) {
@@ -52,7 +52,7 @@ public class SessionMap {
 		while (iterator.hasNext()) {
 			Map.Entry<String, ServerSession> next = iterator.next();
 			User person = next.getValue().getUser();
-			if (person.getUid().equals(user.getUid()) && person.getPlatform().equals(user.getPlatform())) {
+			if (person.getUserId().equals(user.getUserId()) && person.getPlatform().equals(user.getPlatform())) {
 				return true;
 			}
 		}

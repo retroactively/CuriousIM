@@ -2,6 +2,7 @@ package com.example.imserver;
 
 import com.example.common.codec.ProtobufDecoder;
 import com.example.common.codec.ProtobufEncoder;
+import com.example.imserver.handler.ChatRedirectHandler;
 import com.example.imserver.handler.HeartBeatServerHandler;
 import com.example.imserver.handler.LoginRequestHandler;
 import com.example.imserver.handler.ServerExceptionHandler;
@@ -33,13 +34,16 @@ public class ChatServer {
 	private LoginRequestHandler loginRequestHandler;
 
 	@Autowired
+	private ChatRedirectHandler chatRedirectHandler;
+
+	@Autowired
 	private ServerExceptionHandler serverExceptionHandler;
 
 	@PostConstruct
 	public void run() {
 		ServerBootstrap bootstrap = new ServerBootstrap();
-		EventLoopGroup  bossGroup = new NioEventLoopGroup();
-		EventLoopGroup  workGroup = new NioEventLoopGroup();
+		EventLoopGroup bossGroup = new NioEventLoopGroup();
+		EventLoopGroup workGroup = new NioEventLoopGroup();
 
 		try {
 			bootstrap.group(bossGroup, workGroup);
@@ -55,6 +59,7 @@ public class ChatServer {
 					ch.pipeline().addLast(new ProtobufEncoder());
 					ch.pipeline().addLast(new HeartBeatServerHandler());
 					ch.pipeline().addLast(loginRequestHandler);
+					ch.pipeline().addLast(chatRedirectHandler);
 					ch.pipeline().addLast(serverExceptionHandler);
 				}
 			});

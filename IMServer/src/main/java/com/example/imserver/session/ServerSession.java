@@ -16,6 +16,8 @@ import java.util.UUID;
 
 @Slf4j
 public class ServerSession {
+
+	// AttributeKey  内部实现为 常量池 ： ConstantPool
 	public static final AttributeKey<String> KEY_USER_ID = AttributeKey.valueOf("key_user_id");
 
 	public static final AttributeKey<ServerSession> SESSION_KEY = AttributeKey.valueOf("session_key");

@@ -159,7 +159,7 @@ public class CommandController {
 			return;
 		}
 		User user = User.builder()
-				.uid(command.getUserName())
+				.userId(command.getUserName())
 				.token(command.getPassWord())
 						.devId("123456").build();
 
