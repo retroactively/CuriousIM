@@ -4,7 +4,9 @@ import com.example.common.bean.User;
 import com.example.common.concurrent.FutureTaskScheduler;
 import com.example.imclient.clientcommand.BaseCommand;
 import com.example.imclient.clientcommand.ClientMenuCommand;
+import com.example.imclient.clientcommand.ConsoleChatCommand;
 import com.example.imclient.clientcommand.ConsoleLoginCommand;
+import com.example.imclient.sender.ChatMsgSender;
 import com.example.imclient.sender.LoginSender;
 import com.example.imclient.session.ClientSession;
 import io.netty.channel.Channel;
@@ -23,16 +25,22 @@ import java.util.concurrent.TimeUnit;
 public class CommandController {
 
 	@Autowired
-	private ConsoleLoginCommand loginCommand;
-
-	@Autowired
 	private ClientMenuCommand clientMenuCommand;
 
 	@Autowired
-	private ChatClient chatClient;
+	private ConsoleLoginCommand loginCommand;
+
+	@Autowired
+	private ConsoleChatCommand chatCommand;
 
 	@Autowired
 	private LoginSender loginSender;
+
+	@Autowired
+	private ChatMsgSender chatMsgSender;
+
+	@Autowired
+	private ChatClient chatClient;
 
 	private Map<String, BaseCommand> commandMap;
 
@@ -47,6 +55,8 @@ public class CommandController {
 	private boolean connectFlag = false;
 
 	private String menuStr;
+
+	private User user;
 
 
 	GenericFutureListener<ChannelFuture> closeListener = (ChannelFuture future) -> {
@@ -102,6 +112,7 @@ public class CommandController {
 		commandMap = new HashMap<>();
 		commandMap.put(loginCommand.getKey(), loginCommand);
 		commandMap.put(clientMenuCommand.getKey(), clientMenuCommand);
+		commandMap.put(chatCommand.getKey(), chatCommand);
 
 		Set<Map.Entry<String, BaseCommand>> entries = commandMap.entrySet();
 		Iterator<Map.Entry<String, BaseCommand>> iterator = entries.iterator();
@@ -148,6 +159,10 @@ public class CommandController {
 						command.execute(scanner);
 						startLogin((ConsoleLoginCommand) command);
 						break;
+					case ConsoleChatCommand.KEY:
+						command.execute(scanner);
+						startSingleChat((ConsoleChatCommand) command);
+						break;
 				}
 			}
 		}
@@ -158,7 +173,7 @@ public class CommandController {
 			log.info("connect is wrong, please try again.");
 			return;
 		}
-		User user = User.builder()
+		user = User.builder()
 				.userId(command.getUserName())
 				.token(command.getPassWord())
 						.devId("123456").build();
@@ -169,7 +184,24 @@ public class CommandController {
 		loginSender.sendLoginMsg();
 	}
 
+	private void startSingleChat(ConsoleChatCommand command) {
+		if (!isLogin()) {
+			log.warn("not login, please login first");
+			return;
+		}
 
+		chatMsgSender.setClientSession(session);
+		chatMsgSender.setUser(user);
+		chatMsgSender.sendChatMessage(command.getToId(), command.getMessage());
+	}
+
+	private boolean isLogin() {
+		if (null == session) {
+			log.warn("session in null!");
+			return false;
+		}
+		return session.isLoginState();
+	}
 
 
 

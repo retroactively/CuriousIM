@@ -2,6 +2,7 @@ package com.example.imclient;
 
 import com.example.common.codec.ProtobufDecoder;
 import com.example.common.codec.ProtobufEncoder;
+import com.example.imclient.handler.ChatMsgHandler;
 import com.example.imclient.handler.ExceptionHandler;
 import com.example.imclient.handler.LoginResponseHandler;
 import io.netty.bootstrap.Bootstrap;
@@ -39,6 +40,8 @@ public class ChatClient {
 	@Autowired
 	private ExceptionHandler exceptionHandler;
 
+	private ChatMsgHandler chatMsgHandler;
+
 	private GenericFutureListener<ChannelFuture> connectedListener;
 
 	private EventLoopGroup eventLoopGroup;
@@ -64,6 +67,7 @@ public class ChatClient {
 					ch.pipeline().addLast("decoder", new ProtobufDecoder());
 					ch.pipeline().addLast("encoder", new ProtobufEncoder());
 					ch.pipeline().addLast(responseHandler);
+					ch.pipeline().addLast(chatMsgHandler);
 					ch.pipeline().addLast(exceptionHandler);
 				}
 			});
