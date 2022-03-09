@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 
 @Slf4j
 @Data
@@ -40,6 +39,7 @@ public class ChatClient {
 	@Autowired
 	private ExceptionHandler exceptionHandler;
 
+	@Autowired
 	private ChatMsgHandler chatMsgHandler;
 
 	private GenericFutureListener<ChannelFuture> connectedListener;
@@ -66,8 +66,8 @@ public class ChatClient {
 				protected void initChannel(SocketChannel ch) throws Exception {
 					ch.pipeline().addLast("decoder", new ProtobufDecoder());
 					ch.pipeline().addLast("encoder", new ProtobufEncoder());
-					ch.pipeline().addLast(responseHandler);
 					ch.pipeline().addLast(chatMsgHandler);
+					ch.pipeline().addLast(responseHandler);
 					ch.pipeline().addLast(exceptionHandler);
 				}
 			});

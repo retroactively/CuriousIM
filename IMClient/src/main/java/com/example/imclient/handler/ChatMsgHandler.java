@@ -19,7 +19,7 @@ public class ChatMsgHandler extends ChannelInboundHandlerAdapter {
 		}
 
 		Immsg.Message pkg = (Immsg.Message) msg;
-		if (pkg.getType().equals(Immsg.HeadType.MESSAGE_REQUEST)) {
+		if (!pkg.getType().equals(Immsg.HeadType.MESSAGE_REQUEST)) {
 			super.channelRead(ctx, msg);
 			return;
 		}

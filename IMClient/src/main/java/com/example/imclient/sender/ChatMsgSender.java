@@ -16,6 +16,7 @@ public class ChatMsgSender extends BaseSender{
 		msg.setContent(content);
 		msg.setMsgtype(ChatMsg.MSGTYPE.TEXT);
 		msg.setTo(touid);
+		msg.setMsgId(123L);
 		msg.setTime(System.currentTimeMillis());
 		Immsg.Message message = ChatMsgBuilder.buildChatMsg(msg, getUser(), getClientSession());
 		super.sendMessage(message);

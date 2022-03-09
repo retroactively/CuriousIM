@@ -49,36 +49,36 @@ public class ChatMsg {
 	}
 
 	public void fillMsg(Immsg.MessageRequest.Builder builder) {
-		BeanUtils.copyProperties(this, builder);
-//		if (msgId > 0) {
-//			builder.setMsgId(msgId);
-//		}
-//		if (time > 0) {
-//			builder.setTime(time);
-//		}
-//		if (msgtype != null) {
-//			builder.setMsgType(msgtype.ordinal());
-//		}
-//		if (StringUtils.isNotEmpty(from)) {
-//			builder.setFrom(from);
-//		}
-//		if (StringUtils.isNotEmpty(to)) {
-//			builder.setTo(to);
-//		}
-//		if (StringUtils.isNotEmpty(content)) {
-//			builder.setContent(content);
-//		}
-//		if (StringUtils.isNotEmpty(url)) {
-//			builder.setUrl(url);
-//		}
-//		if (StringUtils.isNotEmpty(property)) {
-//			builder.setProperty(property);
-//		}
-//		if (StringUtils.isNotEmpty(fromNick)) {
-//			builder.setProperty(fromNick);
-//		}
-//		if (StringUtils.isNotEmpty(json)) {
-//			builder.setProperty(json);
-//		}
+//		BeanUtils.copyProperties(this, builder);
+		if (msgId > 0) {
+			builder.setMsgId(msgId);
+		}
+		if (time > 0) {
+			builder.setTime(time);
+		}
+		if (msgtype != null) {
+			builder.setMsgType(msgtype.ordinal());
+		}
+		if (StringUtils.isNotEmpty(from)) {
+			builder.setFrom(from);
+		}
+		if (StringUtils.isNotEmpty(to)) {
+			builder.setTo(to);
+		}
+		if (StringUtils.isNotEmpty(content)) {
+			builder.setContent(content);
+		}
+		if (StringUtils.isNotEmpty(url)) {
+			builder.setUrl(url);
+		}
+		if (StringUtils.isNotEmpty(property)) {
+			builder.setProperty(property);
+		}
+		if (StringUtils.isNotEmpty(fromNick)) {
+			builder.setProperty(fromNick);
+		}
+		if (StringUtils.isNotEmpty(json)) {
+			builder.setProperty(json);
+		}
 	}
 }
