@@ -47,6 +47,7 @@ public class CommandController {
 	private Scanner scanner;
 
 	private Channel channel;
+
 	GenericFutureListener<ChannelFuture> closeListener = (ChannelFuture future) -> {
 		log.info(new Date() + " : connection disconnected ...");
 		channel = future.channel();
@@ -55,9 +56,11 @@ public class CommandController {
 		// 唤醒用户线程
 		notifyCommandThread();
 	};
+	
 	private ClientSession session;
 	private int reconnectCount = 0;
 	private boolean connectFlag = false;
+
 	GenericFutureListener<ChannelFuture> connectedListener = (ChannelFuture future) -> {
 		final EventLoop eventLoop = future.channel().eventLoop();
 		if (!future.isSuccess() && (++reconnectCount < 3)) {

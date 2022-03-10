@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.imserver.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.imserver.domain.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="userNickName" jdbcType="VARCHAR" property="usernickname" />
+    <result column="userHead" jdbcType="VARCHAR" property="userhead" />
+    <result column="userPassword" jdbcType="VARCHAR" property="userpassword" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, userNickName, userHead, userPassword, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.imserver.domain.User">
+    insert into user (id, userId, userNickName, 
+      userHead, userPassword, createTime, 
+      updateTime)
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=VARCHAR}, #{usernickname,jdbcType=VARCHAR}, 
+      #{userhead,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.imserver.domain.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="usernickname != null">
+        userNickName,
+      </if>
+      <if test="userhead != null">
+        userHead,
+      </if>
+      <if test="userpassword != null">
+        userPassword,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="usernickname != null">
+        #{usernickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userhead != null">
+        #{userhead,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.imserver.domain.User">
+    update user
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="usernickname != null">
+        userNickName = #{usernickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userhead != null">
+        userHead = #{userhead,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.imserver.domain.User">
+    update user
+    set userId = #{userid,jdbcType=VARCHAR},
+      userNickName = #{usernickname,jdbcType=VARCHAR},
+      userHead = #{userhead,jdbcType=VARCHAR},
+      userPassword = #{userpassword,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

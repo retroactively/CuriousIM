@@ -2,6 +2,7 @@ package com.example.imserver;
 
 import com.example.common.codec.ProtobufDecoder;
 import com.example.common.codec.ProtobufEncoder;
+import com.example.common.util.RedisUtil;
 import com.example.imserver.handler.ChatRedirectHandler;
 import com.example.imserver.handler.HeartBeatServerHandler;
 import com.example.imserver.handler.LoginRequestHandler;
@@ -28,14 +29,20 @@ import java.net.InetSocketAddress;
 @Service("ChatServer")
 public class ChatServer {
 
-	@Value("${server.host}")
-	private String host;
-
 	@Value("${server.port}")
 	private String serverPort;
 
+	@Value("${server.host}")
+	private String zkHost;
+
 	@Value("${zookeeper.port}")
 	private String zkPort;
+
+	@Value("${redis.addr}")
+	private String redisAddr;
+
+	@Value("${redis.password}")
+	private String redisPassword;
 
 	@Autowired
 	private LoginRequestHandler loginRequestHandler;
@@ -74,8 +81,10 @@ public class ChatServer {
 				}
 			});
 			// 绑定端口
-			ChannelFuture future = bootstrap.bind().sync().addListener(zkUtil.getZKFutureListener(host, zkPort));
-			log.info("server start successfully at: " + host + ":" + serverPort);
+			ChannelFuture future = bootstrap.bind().sync()
+					.addListener(zkUtil.getZKFutureListener(zkHost, zkPort));
+			RedisUtil.connect(redisAddr, redisPassword);
+			log.info("server start successfully at: " + ":" + serverPort);
 			// 关闭
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {

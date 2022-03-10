@@ -5,3 +5,18 @@ zookeeper:
   host: 127.0.0.1
   port: 2181
 
+redis:
+  addr: redis://127.0.0.1:6379
+  password: "root"
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/itstack?useUnicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  config-location:  classpath:/mybatis/config/mybatis-config.xml
+

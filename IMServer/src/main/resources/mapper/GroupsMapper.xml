@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.imserver.mapper.GroupsMapper">
+  <resultMap id="BaseResultMap" type="com.example.imserver.domain.Groups">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="groupId" jdbcType="VARCHAR" property="groupid" />
+    <result column="groupName" jdbcType="VARCHAR" property="groupname" />
+    <result column="groupHead" jdbcType="VARCHAR" property="grouphead" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, groupId, groupName, groupHead, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from groups
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from groups
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.imserver.domain.Groups">
+    insert into groups (id, groupId, groupName, 
+      groupHead, createTime, updateTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{groupid,jdbcType=VARCHAR}, #{groupname,jdbcType=VARCHAR}, 
+      #{grouphead,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.imserver.domain.Groups">
+    insert into groups
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="groupid != null">
+        groupId,
+      </if>
+      <if test="groupname != null">
+        groupName,
+      </if>
+      <if test="grouphead != null">
+        groupHead,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null">
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="grouphead != null">
+        #{grouphead,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.imserver.domain.Groups">
+    update groups
+    <set>
+      <if test="groupid != null">
+        groupId = #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupname != null">
+        groupName = #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="grouphead != null">
+        groupHead = #{grouphead,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.imserver.domain.Groups">
+    update groups
+    set groupId = #{groupid,jdbcType=VARCHAR},
+      groupName = #{groupname,jdbcType=VARCHAR},
+      groupHead = #{grouphead,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
