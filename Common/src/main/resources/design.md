@@ -20,7 +20,7 @@ TODO:
         2）单聊
         3）群聊
     系统：
-        1) 数据库支持
+        1) 数据库支持 (mysql)
         2）Redis缓存session
         3）Kafka数据消费
         4) Jmeter数据测试

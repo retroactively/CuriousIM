@@ -47,18 +47,6 @@ public class CommandController {
 	private Scanner scanner;
 
 	private Channel channel;
-
-	private ClientSession session;
-
-	private int reconnectCount = 0;
-
-	private boolean connectFlag = false;
-
-	private String menuStr;
-
-	private User user;
-
-
 	GenericFutureListener<ChannelFuture> closeListener = (ChannelFuture future) -> {
 		log.info(new Date() + " : connection disconnected ...");
 		channel = future.channel();
@@ -67,13 +55,15 @@ public class CommandController {
 		// 唤醒用户线程
 		notifyCommandThread();
 	};
-
-
+	private ClientSession session;
+	private int reconnectCount = 0;
+	private boolean connectFlag = false;
 	GenericFutureListener<ChannelFuture> connectedListener = (ChannelFuture future) -> {
 		final EventLoop eventLoop = future.channel().eventLoop();
 		if (!future.isSuccess() && (++reconnectCount < 3)) {
 			log.info("connect failed, try to reconnect in 10 seconds, {} times", reconnectCount);
-			eventLoop.schedule(() -> chatClient.connect(), 10, TimeUnit.SECONDS);
+			eventLoop.schedule(() -> chatClient.connect(chatClient.getServerInfo()[0],
+					chatClient.getServerInfo()[1]), 10, TimeUnit.SECONDS);
 			connectFlag = false;
 		} else if (future.isSuccess()) {
 			connectFlag = true;
@@ -93,7 +83,9 @@ public class CommandController {
 			notifyCommandThread();
 		}
 	};
+	private String menuStr;
 
+	private User user;
 
 	public synchronized void notifyCommandThread() {
 		this.notify();
@@ -117,7 +109,7 @@ public class CommandController {
 		Set<Map.Entry<String, BaseCommand>> entries = commandMap.entrySet();
 		Iterator<Map.Entry<String, BaseCommand>> iterator = entries.iterator();
 
-		StringBuilder menus =new StringBuilder();
+		StringBuilder menus = new StringBuilder();
 		menus.append("[menu] ");
 		while (iterator.hasNext()) {
 			BaseCommand next = iterator.next().getValue();
@@ -131,11 +123,11 @@ public class CommandController {
 	public void startConnectServer() {
 		FutureTaskScheduler.add(() -> {
 			chatClient.setConnectedListener(connectedListener);
-			chatClient.connect();
+			chatClient.startup();
 		});
 	}
 
-	public void startCommandThread() throws InterruptedException{
+	public void startCommandThread() throws InterruptedException {
 		Thread.currentThread().setName("Command Thread");
 		while (true) {
 			// 建立连接
@@ -176,7 +168,7 @@ public class CommandController {
 		user = User.builder()
 				.userId(command.getUserName())
 				.token(command.getPassWord())
-						.devId("123456").build();
+				.devId("123456").build();
 
 		session.setUser(user);
 		loginSender.setUser(user);
@@ -202,8 +194,6 @@ public class CommandController {
 		}
 		return session.isLoginState();
 	}
-
-
 
 
 }

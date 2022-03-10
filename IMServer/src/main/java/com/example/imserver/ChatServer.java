@@ -6,6 +6,7 @@ import com.example.imserver.handler.ChatRedirectHandler;
 import com.example.imserver.handler.HeartBeatServerHandler;
 import com.example.imserver.handler.LoginRequestHandler;
 import com.example.imserver.handler.ServerExceptionHandler;
+import com.example.imserver.util.ZkUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelFuture;
@@ -27,8 +28,14 @@ import java.net.InetSocketAddress;
 @Service("ChatServer")
 public class ChatServer {
 
+	@Value("${server.host}")
+	private String host;
+
 	@Value("${server.port}")
-	private int port;
+	private String serverPort;
+
+	@Value("${zookeeper.port}")
+	private String zkPort;
 
 	@Autowired
 	private LoginRequestHandler loginRequestHandler;
@@ -39,16 +46,19 @@ public class ChatServer {
 	@Autowired
 	private ServerExceptionHandler serverExceptionHandler;
 
+	private ZkUtil zkUtil;
+
 	@PostConstruct
 	public void run() {
 		ServerBootstrap bootstrap = new ServerBootstrap();
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workGroup = new NioEventLoopGroup();
+		zkUtil = new ZkUtil();
 
 		try {
 			bootstrap.group(bossGroup, workGroup);
 			bootstrap.channel(NioServerSocketChannel.class);
-			bootstrap.localAddress(new InetSocketAddress(port));
+			bootstrap.localAddress(new InetSocketAddress(Integer.parseInt(serverPort)));
 			bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
 			bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
 
@@ -64,8 +74,8 @@ public class ChatServer {
 				}
 			});
 			// 绑定端口
-			ChannelFuture future = bootstrap.bind().sync();
-			log.info("IM server start at port: " + port);
+			ChannelFuture future = bootstrap.bind().sync().addListener(zkUtil.getZKFutureListener(host, zkPort));
+			log.info("server start successfully at: " + host + ":" + serverPort);
 			// 关闭
 			future.channel().closeFuture().sync();
 		} catch (Exception e) {

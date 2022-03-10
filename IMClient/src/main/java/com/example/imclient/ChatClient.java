@@ -2,9 +2,11 @@ package com.example.imclient;
 
 import com.example.common.codec.ProtobufDecoder;
 import com.example.common.codec.ProtobufEncoder;
+import com.example.common.util.RedisUtil;
 import com.example.imclient.handler.ChatMsgHandler;
 import com.example.imclient.handler.ExceptionHandler;
 import com.example.imclient.handler.LoginResponseHandler;
+import com.example.imclient.util.ZkUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelFuture;
@@ -27,11 +29,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChatClient {
 
-	@Value("${server.ip}")
-	private String host;
+	@Value("${zookeeper.host}")
+	private String zkHost;
 
-	@Value("${server.port}")
-	private int port;
+	@Value("${zookeeper.port}")
+	private String zkPort;
+
+	@Value("${redis.addr}")
+	private String redisAddr;
+
+	@Value("${redis.password}")
+	private String redisPwd;
 
 	@Autowired
 	private LoginResponseHandler responseHandler;
@@ -48,18 +56,20 @@ public class ChatClient {
 
 	private Bootstrap bootstrap;
 
+	private String[] serverInfo;
+
 	ChatClient() {
 		eventLoopGroup = new NioEventLoopGroup();
 		bootstrap = new Bootstrap();
 	}
 
-	public void connect() {
+	public void connect(String host, String port) {
 		try {
 			bootstrap.group(eventLoopGroup);
 			bootstrap.channel(NioSocketChannel.class);
 			bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
 			bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
-			bootstrap.remoteAddress(host, port);
+			bootstrap.remoteAddress(host, Integer.parseInt(port));
 
 			bootstrap.handler(new ChannelInitializer<SocketChannel>() {
 				@Override
@@ -87,4 +97,18 @@ public class ChatClient {
 		eventLoopGroup.shutdownGracefully();
 	}
 
+	public void startup() {
+		RedisUtil.connect(redisAddr, redisPwd);
+		ZkUtil zkUtil = new ZkUtil();
+		zkUtil.connect(zkHost, zkPort);
+
+		try {
+			serverInfo = zkUtil.getRandomServer();
+			connect(serverInfo[0], serverInfo[1]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}
 }
