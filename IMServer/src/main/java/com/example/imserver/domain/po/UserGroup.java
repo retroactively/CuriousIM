@@ -1,17 +1,13 @@
-package com.example.imserver.domain;
+package com.example.imserver.domain.po;
 
 import java.util.Date;
 
-public class User {
+public class UserGroup {
     private Long id;
 
     private String userid;
 
-    private String usernickname;
-
-    private String userhead;
-
-    private String userpassword;
+    private String groupid;
 
     private Date createtime;
 
@@ -33,28 +29,12 @@ public class User {
         this.userid = userid == null ? null : userid.trim();
     }
 
-    public String getUsernickname() {
-        return usernickname;
+    public String getGroupid() {
+        return groupid;
     }
 
-    public void setUsernickname(String usernickname) {
-        this.usernickname = usernickname == null ? null : usernickname.trim();
-    }
-
-    public String getUserhead() {
-        return userhead;
-    }
-
-    public void setUserhead(String userhead) {
-        this.userhead = userhead == null ? null : userhead.trim();
-    }
-
-    public String getUserpassword() {
-        return userpassword;
-    }
-
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword == null ? null : userpassword.trim();
+    public void setGroupid(String groupid) {
+        this.groupid = groupid == null ? null : groupid.trim();
     }
 
     public Date getCreatetime() {

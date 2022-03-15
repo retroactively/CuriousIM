@@ -6,6 +6,8 @@ import org.redisson.config.Config;
 
 public class RedisUtil {
 
+	public static final String USER_MAP_KEY = "chat:user:map";
+
 	private static RedissonClient client;
 
 	public static void connect(String addr, String pwd) {
@@ -21,5 +23,9 @@ public class RedisUtil {
 
 	public static RedissonClient getRedis() {
 		return client;
+	}
+
+	public static String sessionStore(Long uid) {
+		return "chat:user:session:" + uid;
 	}
 }

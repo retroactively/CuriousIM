@@ -1,6 +1,6 @@
-package com.example.imserver.mapper;
+package com.example.imserver.domain.dao;
 
-import com.example.imserver.domain.UserGroup;
+import com.example.imserver.domain.po.UserGroup;
 
 public interface UserGroupMapper {
     int deleteByPrimaryKey(Long id);

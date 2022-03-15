@@ -1,6 +1,6 @@
-package com.example.imserver.mapper;
+package com.example.imserver.domain.dao;
 
-import com.example.imserver.domain.UserFriend;
+import com.example.imserver.domain.po.UserFriend;
 
 public interface UserFriendMapper {
     int deleteByPrimaryKey(Long id);

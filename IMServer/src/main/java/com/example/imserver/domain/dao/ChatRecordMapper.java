@@ -1,6 +1,6 @@
-package com.example.imserver.mapper;
+package com.example.imserver.domain.dao;
 
-import com.example.imserver.domain.ChatRecord;
+import com.example.imserver.domain.po.ChatRecord;
 
 public interface ChatRecordMapper {
     int deleteByPrimaryKey(Long id);

@@ -1,13 +1,15 @@
-package com.example.imserver.domain;
+package com.example.imserver.domain.po;
 
 import java.util.Date;
 
-public class UserGroup {
+public class TalkBox {
     private Long id;
 
     private String userid;
 
-    private String groupid;
+    private String talkid;
+
+    private Integer talktype;
 
     private Date createtime;
 
@@ -29,12 +31,20 @@ public class UserGroup {
         this.userid = userid == null ? null : userid.trim();
     }
 
-    public String getGroupid() {
-        return groupid;
+    public String getTalkid() {
+        return talkid;
     }
 
-    public void setGroupid(String groupid) {
-        this.groupid = groupid == null ? null : groupid.trim();
+    public void setTalkid(String talkid) {
+        this.talkid = talkid == null ? null : talkid.trim();
+    }
+
+    public Integer getTalktype() {
+        return talktype;
+    }
+
+    public void setTalktype(Integer talktype) {
+        this.talktype = talktype;
     }
 
     public Date getCreatetime() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.imserver.mapper.TalkBoxMapper">
-  <resultMap id="BaseResultMap" type="com.example.imserver.domain.TalkBox">
+<mapper namespace="com.example.imserver.domain.dao.TalkBoxMapper">
+  <resultMap id="BaseResultMap" type="com.example.imserver.domain.po.TalkBox">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="userId" jdbcType="VARCHAR" property="userid" />
     <result column="talkId" jdbcType="VARCHAR" property="talkid" />
@@ -22,7 +22,7 @@
     delete from talk_box
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.example.imserver.domain.TalkBox">
+  <insert id="insert" parameterType="com.example.imserver.domain.po.TalkBox">
     insert into talk_box (id, userId, talkId, 
       talkType, createTime, updateTime
       )
@@ -30,7 +30,7 @@
       #{talktype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.example.imserver.domain.TalkBox">
+  <insert id="insertSelective" parameterType="com.example.imserver.domain.po.TalkBox">
     insert into talk_box
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.imserver.domain.TalkBox">
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.imserver.domain.po.TalkBox">
     update talk_box
     <set>
       <if test="userid != null">
@@ -94,7 +94,211 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.imserver.domain.TalkBox">
+  <update id="updateByPrimaryKey" parameterType="com.example.imserver.domain.po.TalkBox">
+    update talk_box
+    set userId = #{userid,jdbcType=VARCHAR},
+      talkId = #{talkid,jdbcType=VARCHAR},
+      talkType = #{talktype,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.example.imserver.domain.po.TalkBox">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="talkId" jdbcType="VARCHAR" property="talkid" />
+    <result column="talkType" jdbcType="INTEGER" property="talktype" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, talkId, talkType, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from talk_box
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from talk_box
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.imserver.domain.po.TalkBox">
+    insert into talk_box (id, userId, talkId, 
+      talkType, createTime, updateTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=VARCHAR}, #{talkid,jdbcType=VARCHAR}, 
+      #{talktype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.imserver.domain.po.TalkBox">
+    insert into talk_box
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="talkid != null">
+        talkId,
+      </if>
+      <if test="talktype != null">
+        talkType,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="talkid != null">
+        #{talkid,jdbcType=VARCHAR},
+      </if>
+      <if test="talktype != null">
+        #{talktype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.imserver.domain.po.TalkBox">
+    update talk_box
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="talkid != null">
+        talkId = #{talkid,jdbcType=VARCHAR},
+      </if>
+      <if test="talktype != null">
+        talkType = #{talktype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.imserver.domain.po.TalkBox">
+    update talk_box
+    set userId = #{userid,jdbcType=VARCHAR},
+      talkId = #{talkid,jdbcType=VARCHAR},
+      talkType = #{talktype,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.example.imserver.domain.po.TalkBox">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="talkId" jdbcType="VARCHAR" property="talkid" />
+    <result column="talkType" jdbcType="INTEGER" property="talktype" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, talkId, talkType, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from talk_box
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from talk_box
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.imserver.domain.po.TalkBox">
+    insert into talk_box (id, userId, talkId, 
+      talkType, createTime, updateTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=VARCHAR}, #{talkid,jdbcType=VARCHAR}, 
+      #{talktype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.imserver.domain.po.TalkBox">
+    insert into talk_box
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="talkid != null">
+        talkId,
+      </if>
+      <if test="talktype != null">
+        talkType,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="talkid != null">
+        #{talkid,jdbcType=VARCHAR},
+      </if>
+      <if test="talktype != null">
+        #{talktype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.imserver.domain.po.TalkBox">
+    update talk_box
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="talkid != null">
+        talkId = #{talkid,jdbcType=VARCHAR},
+      </if>
+      <if test="talktype != null">
+        talkType = #{talktype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.imserver.domain.po.TalkBox">
     update talk_box
     set userId = #{userid,jdbcType=VARCHAR},
       talkId = #{talkid,jdbcType=VARCHAR},

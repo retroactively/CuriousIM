@@ -1,4 +1,4 @@
-package com.example.imserver.domain;
+package com.example.imserver.domain.po;
 
 import java.util.Date;
 
